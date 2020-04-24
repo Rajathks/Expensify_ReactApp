@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Expenses List Componenet Render :  1`] = `
+<div>
+  <h2>
+     Here is your Expense List
+  </h2>
+  <ExpenseListItem
+    amount="5000"
+    createDate={"1970-01-01T00:00:00.000Z"}
+    description="lGum"
+    id="1"
+    key="1"
+    note="sample note"
+  />
+  <ExpenseListItem
+    amount="8000"
+    createDate={-345600000}
+    description="Rent"
+    id="2"
+    key="2"
+    note="Rent note"
+  />
+  <ExpenseListItem
+    amount="9000"
+    createDate={432000000}
+    description="Bill"
+    id="3"
+    key="3"
+    note="Bill note"
+  />
+</div>
+`;
