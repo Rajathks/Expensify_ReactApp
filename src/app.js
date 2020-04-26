@@ -11,6 +11,7 @@ import getVisibleExpenses from "../src/selectors/expenses";
 import "react-dates/lib/css/_datepicker.css";
 
 const store = configureStore();
+console.log("testt");
 
 const JSX = (
   <Provider store={store}>
