@@ -10,7 +10,7 @@ import numeral from "numeral";
       <h3> Description : {description}</h3>{" "}
     </Link>
     <p> Amount : {numeral(amount/100).format('$0,00,000')}</p>
-    <p> Created on : {moment(createDate).format(" MMMM DO - YYYY")}</p>
+    <p> Created on : {moment(createDate).format(" MMMM Do - YYYY")}</p>
   </div>
 );
 

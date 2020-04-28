@@ -13,14 +13,7 @@ const Header = () => (
         {" "}
         Add Expense{" "}
       </NavLink>
-      <NavLink activeClassName="is-active" to="edit">
-        {" "}
-        Edit Expense Details{" "}
-      </NavLink>
-      <NavLink activeClassName="is-active" to="help">
-        {" "}
-        Help Me{" "}
-      </NavLink>
+      
     </div>
   </div>
 );
