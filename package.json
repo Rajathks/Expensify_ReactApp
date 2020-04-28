@@ -5,7 +5,6 @@
   "author": "Rajath KS",
   "license": "MIT",
   "scripts": {
-  
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
@@ -27,6 +26,7 @@
     "moment": "^2.24.0",
     "node-sass": "^4.13.1",
     "normalize.css": "^7.0.0",
+    "numeral": "^2.0.6",
     "raf": "^3.4.1",
     "react": "^16.13.1",
     "react-addons-shallow-compare": "^15.6.2",
@@ -41,7 +41,7 @@
     "uuid": "^7.0.3",
     "webpack": "^4.42.1"
   },
-  "devDependencies": {  
+  "devDependencies": {
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.4",

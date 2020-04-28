@@ -14,11 +14,11 @@ exports[`Expense List Item Componenet Test :  1`] = `
   </Link>
   <p>
      Amount : 
-    5000
+    $50
   </p>
   <p>
      Created on : 
-    <Component />
+     January 1O - 1970
   </p>
 </div>
 `;
