@@ -28,11 +28,11 @@ const expenses = [
     }
 ];
 
-let AddExpenses , history , wrapper;
+let startAddExpense , history , wrapper;
 beforeEach(() =>{
-     AddExpenses = jest.fn();
+    startAddExpense = jest.fn();
      history = {push: jest.fn()};
-     wrapper = shallow(<AddExpensePage AddExpenses = {AddExpenses} history = {history} />);
+     wrapper = shallow(<AddExpensePage startAddExpense = {startAddExpense} history = {history} />);
 });
 test("Should render add expense page correctly", () => {
     
@@ -44,6 +44,6 @@ test("Should render add expense page correctly", () => {
    
     wrapper.find("ExpenseForm").prop('onSubmit')(expenses[0]);
     expect(history.push).toHaveBeenLastCalledWith('/');
-    expect(AddExpenses).toHaveBeenLastCalledWith(expenses[0]);
+    expect(startAddExpense).toHaveBeenLastCalledWith(expenses[0]);
 
 });

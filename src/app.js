@@ -9,6 +9,7 @@ import { AddExpenses } from "./actions/expenses";
 import { SearchText } from "./actions/filters";
 import getVisibleExpenses from "../src/selectors/expenses";
 import "react-dates/lib/css/_datepicker.css";
+import "./firebase/firebase";
 
 const store = configureStore();
 console.log("testt");
