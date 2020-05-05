@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export const expenses = [
+export  const expense=  [
     {
         id:"1",
         description : "lGum",

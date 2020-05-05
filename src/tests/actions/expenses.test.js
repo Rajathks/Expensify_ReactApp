@@ -3,11 +3,14 @@ import {
   EditExpense,
   RemoveExpense,
   startAddExpense,
+  setExpenses,
+  startSetExpenses,
 } from "../../actions/expenses";
 import moment from "moment";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import database from "../../firebase/firebase";
+import ExpensifyReducer from "../../reducers/expenses";
 
 const createMockStore = configureMockStore([thunk]);
 
@@ -15,25 +18,36 @@ const expenses = [
   {
     id: "1",
     description: "lGum",
-    note: "sample note",
+    notes: "sample note",
     amount: parseFloat("5000", 10) * 100,
-    createDate: moment(0),
+    createDate: 2000,
   },
   {
     id: "2",
     description: "Rent",
-    note: "Rent note",
+    notes: "Rent note",
     amount: "8000",
-    createDate: moment(0).subtract(4, "days").valueOf(),
+    createDate: 3000,
   },
   {
     id: "3",
     description: "Bill",
-    note: "Bill note",
+    notes: "Bill note",
     amount: "9000",
-    createDate: moment(0).add(5, "days").valueOf(),
+    createDate: -5000,
   },
 ];
+
+beforeEach((done) => {
+  const edata = {};
+  expenses.forEach(({ id, description, notes, amount, createDate }) => {
+    edata[id] = { description, notes, amount, createDate };
+  });
+  database
+    .ref("expenses")
+    .set(edata)
+    .then(() => done());
+});
 
 test("Test Remove Expense Action Generator", () => {
   const result = RemoveExpense({ id: "Raj123" });
@@ -61,25 +75,6 @@ test("Add Expense Data Handler", () => {
     expense: expenses[0],
   });
 });
-
-//test('Default Data for Add Expense Handler' , () => {
-//\\  let defaultdata = {
-//    description : "",
-//notes : "",
-//amount : 100,
-//createDate : 0
-
-//}
-//     const result = AddExpenses();
-//     expect(result).toEqual({
-//     type: 'ADDEXPENSES',
-//     expense : {
-//         ...defaultdata,
-//         id:expect.any(String)
-//     }
-
-//     });
-// });
 
 test("Add Expense to database and store with correct value", (done) => {
   const store = createMockStore({});
@@ -110,31 +105,58 @@ test("Add Expense to database and store with correct value", (done) => {
 });
 
 test("Add Expense to database and store with default value", (done) => {
+  const store = createMockStore({});
+  const edata = {
+    description: "",
+    notes: "",
+    amount: 100,
+    createDate: 0,
+  };
+  store
+    .dispatch(startAddExpense({}))
+    .then(() => {
+      const actions = store.getActions();
 
-    const store = createMockStore({});
-    const edata = {
-        description : "",
-        notes : "",
-        amount : 100,
-        createDate : 0
-    };
-    store
-      .dispatch(startAddExpense({}))
-      .then(() => {
-        const actions = store.getActions();
-        expect(actions[0]).toEqual({
-          type: "ADDEXPENSES",
-          expense: {
-            id: expect.any(String),
-            ...edata,
-          },
-        });
-  
-        return database.ref(`expenses/${actions[0].expense.id}`).once("value");
-      })
-      .then((snapshot) => {
-        expect(snapshot.val()).toEqual(edata);
-        done();
+      expect(actions[0]).toEqual({
+        type: "ADDEXPENSES",
+        expense: {
+          id: expect.any(String),
+          ...edata,
+        },
       });
 
+      return database.ref(`expenses/${actions[0].expense.id}`).once("value");
+    })
+    .then((snapshot) => {
+      expect(snapshot.val()).toEqual(edata);
+      done();
+    });
+});
+
+test("Test should set up data with correct action type", () => {
+  const actions = setExpenses(expenses);
+  expect(actions).toEqual({
+    type: "SETEXPENSES",
+    expenses,
+  });
+});
+
+test("should setup set expense action object with data", () => {
+  const action = setExpenses(expenses);
+  expect(action).toEqual({
+    type: "SETEXPENSES",
+    expenses,
+  });
+});
+
+test("should fetch the expenses from firebase", (done) => {
+  const store = createMockStore({});
+  store.dispatch(startSetExpenses()).then(() => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: "SETEXPENSES",
+      expenses,
+    });
+    done();
+  });
 });

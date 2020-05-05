@@ -20,6 +20,9 @@ const ExpensifyReducer = (state = eReducerDefault, action) => {
         }
         return expense;
       });
+    case "SETEXPENSES":
+          return action.expenses;
+
     default: {
       return state;
     }
