@@ -5,6 +5,8 @@ import {
   startAddExpense,
   setExpenses,
   startSetExpenses,
+  startEditExpense,
+  startRemoveExpense,
 } from "../../actions/expenses";
 import moment from "moment";
 import thunk from "redux-thunk";
@@ -57,6 +59,25 @@ test("Test Remove Expense Action Generator", () => {
   });
 });
 
+test("Should remove data from firebase", (done) => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+  store
+    .dispatch(startRemoveExpense({ id }))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "REMOVEEXPENSE",
+        id,
+      });
+      return database.ref(`expenses/${id}`).once("value");
+    })
+    .then((snapshot) => {
+      expect(snapshot.val()).toBeFalsy();
+      done();
+    });
+});
+
 test("Test Edit Expense Action Generator", () => {
   const result = EditExpense("Raj123", { amount: "5000" });
   expect(result).toEqual({
@@ -66,6 +87,31 @@ test("Test Edit Expense Action Generator", () => {
       amount: "5000",
     },
   });
+});
+
+test("Test update functionality on Firebase from Application", (done) => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+  const update = {
+    
+    amount: "6000"
+  };
+  store
+    .dispatch(startEditExpense(id, update))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "EDITEXPENSE",
+        id,
+        update,
+      });
+
+      return database.ref(`expenses/${id}`).once("value");
+    })
+    .then((snapshot) => {
+      expect(snapshot.val().amount).toBe(update.amount);
+      done();
+    });
 });
 
 test("Add Expense Data Handler", () => {

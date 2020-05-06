@@ -28,17 +28,17 @@ const expenses = [
   },
 ];
 
-let EditExpenseSpy, RemoveExpenseSpy, history, wrapper;
+let startEditExpense, startRemoveExpense, history, wrapper;
 
 beforeEach(() => {
-  EditExpenseSpy = jest.fn();
-  RemoveExpenseSpy = jest.fn();
+  startEditExpense = jest.fn();
+  startRemoveExpense = jest.fn();
   history = { push: jest.fn() };
   wrapper = shallow(
     <EditExpensePage
       expense={expenses[0]}
-      EditExpense={EditExpenseSpy}
-      RemoveExpense={RemoveExpenseSpy}
+      startEditExpense={startEditExpense}
+      startRemoveExpense={startRemoveExpense}
       history={history}
     />
   );
@@ -50,12 +50,12 @@ test("Edit Expense Render Test : ", () => {
 test('should handle edit expense',()=>{
     wrapper.find('ExpenseForm').prop('onSubmit')(expenses[0]);
     expect(history.push).toHaveBeenLastCalledWith('/');
-    expect(EditExpenseSpy).toHaveBeenLastCalledWith(expenses[0].id,expenses[0]);
+    expect(startEditExpense).toHaveBeenLastCalledWith(expenses[0].id,expenses[0]);
 });
 
 test('should handle remove expense',()=>{
     wrapper.find('button').simulate('click');
     expect(history.push).toHaveBeenLastCalledWith('/');
-    expect(RemoveExpenseSpy).toHaveBeenLastCalledWith({id:expenses[0].id});
+    expect(startRemoveExpense).toHaveBeenLastCalledWith({id:expenses[0].id});
     
 });
