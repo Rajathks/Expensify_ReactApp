@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Page Component Render Test: 1`] = `
+<div>
+  <button>
+     Login Here Brother
+  </button>
+</div>
+`;
