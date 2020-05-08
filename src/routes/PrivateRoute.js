@@ -12,24 +12,20 @@ export const PrivateRoute = ({
   <Route
     {...rest}
     component={(props) => {
-      return (
-          
-            isAuthenticated ?
-            <div>
- <Header />
-             <Component {...props} /> 
-            </div>
-           
-             : <Redirect to="/" />
-          
+      return isAuthenticated ? (
+        <div>
+          <Header />
+          <Component {...props} />
+        </div>
+      ) : (
+        <Redirect to="/" />
       );
-      
     }}
   />
 );
 
 const mapStateToProps = (state) => {
- // console.log(state);
+  // console.log(state);
 
   return {
     isAuthenticated: !!state.auth.uid,
