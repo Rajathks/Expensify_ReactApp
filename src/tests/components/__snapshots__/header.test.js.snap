@@ -8,8 +8,7 @@ exports[`Header Component Render Test: 1`] = `
   <div>
     <NavLink
       activeClassName="is-active"
-      exact={true}
-      to="/"
+      to="/Dashboard"
     >
        
       Home
