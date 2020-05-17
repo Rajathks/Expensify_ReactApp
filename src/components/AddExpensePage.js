@@ -9,14 +9,21 @@ export class AddExpensePage extends React.Component {
     this.props.history.push("/");
   };
 
-
   render() {
-      return (
-        <div>
+    return (
+      <div>
+        <div className="page-header">
+          <div className="content-container">
+            <h2 className="page-header__title"> Add Expense  </h2>
+           </div>
+        </div>
+        
+        <div className="content-container">
         <ExpenseForm onSubmit={this.onSubmit} />
+        </div>
+       
       </div>
-      );
-   
+    );
   }
 }
 

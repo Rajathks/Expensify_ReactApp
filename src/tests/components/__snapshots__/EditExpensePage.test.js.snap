@@ -2,22 +2,40 @@
 
 exports[`Edit Expense Render Test :  1`] = `
 <div>
-  <ExpenseForm
-    expense={
-      Object {
-        "amount": 500000,
-        "createDate": "1970-01-01T00:00:00.000Z",
-        "description": "lGum",
-        "id": "0",
-        "note": "sample note",
-      }
-    }
-    onSubmit={[Function]}
-  />
-  <button
-    onClick={[Function]}
+  <div
+    className="page-header"
   >
-    Remove Expense
-  </button>
+    <div
+      className="content-container"
+    >
+      <h2
+        className="page-header__title"
+      >
+         Edit this Expense 
+      </h2>
+    </div>
+  </div>
+  <div
+    className="content-container"
+  >
+    <ExpenseForm
+      expense={
+        Object {
+          "amount": 500000,
+          "createDate": "1970-01-01T00:00:00.000Z",
+          "description": "lGum",
+          "id": "0",
+          "note": "sample note",
+        }
+      }
+      onSubmit={[Function]}
+    />
+    <button
+      className="button button--remove"
+      onClick={[Function]}
+    >
+      Remove Expense
+    </button>
+  </div>
 </div>
 `;

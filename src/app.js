@@ -10,6 +10,7 @@ import { login,logout } from "./actions/auth";
 import getVisibleExpenses from "../src/selectors/expenses";
 import "react-dates/lib/css/_datepicker.css";
 import {firebase} from "./firebase/firebase";
+import Loader from "./components/Loader.js";
 
 const store = configureStore();
 console.log("testt");
@@ -20,7 +21,7 @@ const JSX = (
   </Provider>
 ); 
 
-ReactDom.render(<p>..loading</p>, document.getElementById("app"));
+ReactDom.render(<Loader />, document.getElementById("app"));
 
 
 let hasRendered = false;
